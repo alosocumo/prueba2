@@ -1,0 +1,119 @@
+R1
+enable
+conf t
+int se0/3/1
+ip address 30.0.0.9 255.255.255.252
+clock rate 56000
+no shut
+exit
+int se0/3/0
+ip address 30.0.0.6 255.255.255.252
+no shut
+exit
+int g0/0
+no shut
+exit
+int g0/0.10 
+encapsulation dot1q 10
+ip address 17.0.255.254 255.255.128.0
+no shut
+exit
+int g0/0.20 
+encapsulation dot1q 20
+ip address 20.0.31.254 255.255.240.0
+no shut
+exit
+int g0/0.30 
+encapsulation dot1q 30
+ip address 18.3.255.254 255.255.0.0
+no shut
+exit
+router ospf 101 
+network 30.0.0.8 0.0.0.3 area 0
+network 30.0.0.4 0.0.0.3 area 0
+network 17.0.128.0 0.0.127.255 area 0
+network 20.0.16.0 0.0.15.255 area 0
+network 18.3.0.0 0.0.255.255 area 0
+exit
+
+
+R2
+enable
+conf t
+int se0/3/1
+ip address 30.0.0.17 255.255.255.252
+clock rate 56000
+no shut
+exit
+int se0/2/0
+ip address 30.0.0.13 255.255.255.252
+clock rate 56000
+no shut
+exit
+int se0/3/0
+ip address 30.0.0.10 255.255.255.252
+no shut
+exit
+int g0/0
+no shut
+exit
+int g0/0.10 
+encapsulation dot1q 10
+ip address 17.1.127.254 255.255.128.0
+no shut
+exit
+int g0/0.30 
+encapsulation dot1q 30
+ip address 18.4.255.254 255.255.0.0
+no shut
+int g0/0.50 
+encapsulation dot1q 50
+ip address 37.11.255.254 255.252.0.0
+no shut
+EXIT
+router ospf 101 
+network 30.0.0.12 0.0.0.3 area 0
+network 30.0.0.8 0.0.0.3 area 0
+network 17.1.0.0 0.0.127.255.0 area 0
+network 18.4.0.0 0.0.255.255 area 0
+network 37.8.0.0 0.3.255.255 area 0
+exit
+
+R3
+
+enable
+conf t
+int se0/3/1
+ip address 30.0.0.14 255.255.255.252
+no shut
+exit
+int se0/3/0
+ip address 30.0.0.5 255.255.255.252
+clock rate 56000
+no shut
+exit
+int g0/0
+no shut
+exit
+int g0/0.10 
+encapsulation dot1q 10
+ip address 17.1.255.254 255.255.128.0
+no shut
+exit
+int g0/0.20 
+encapsulation dot1q 20
+ip address 20.0.47.254 255.255.240.0
+no shut
+exit
+int g0/0.50 
+encapsulation dot1q 50
+ip address 37.15.255.254
+no shut
+exit
+router ospf 101 
+network 30.0.0.12 0.0.0.3 area 0
+network 30.0.0.4 0.0.0.3 area 0
+network 17.1.128.0 0.0.127.255 area 0
+network 20.0.32.0 0.0.15.255 area 0
+network  area 0
+exit
